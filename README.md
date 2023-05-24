@@ -15,7 +15,7 @@ This repository contains an iOS app called iOSArduinoBLE that enables scanning a
 
 The app is based on the [CoreBluetooth](https://developer.apple.com/documentation/corebluetooth) framework in iOS for managing Bluetooth connectivity.
 
-For detailed usage and functionality of the app, it is recommended to refer to the external article [here](link_to_article) that provides a comprehensive explanation.
+For detailed usage and functionality of the app, it is recommended to refer to the external article [here](https://medium.com/@leonardocavagnis/from-arduino-programming-to-ios-app-development-8b5da1783e1e) that provides a comprehensive explanation.
 
 ## BLE Characteristics
 
