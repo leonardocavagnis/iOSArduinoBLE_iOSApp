@@ -13,6 +13,7 @@ struct ScanView: View {
     
     @State var shouldShowDetail = false
     @State var peripheralList = [Peripheral]()
+    @State var isScanButtonEnabled = false
     
     var body: some View {
         VStack{
@@ -32,6 +33,7 @@ struct ScanView: View {
                 Text("Start Scan")
                     .frame(maxWidth: .infinity)
             }
+            .disabled(!isScanButtonEnabled)
             .buttonStyle(.borderedProminent)
             .padding(.horizontal)
         }
@@ -41,6 +43,8 @@ struct ScanView: View {
                 shouldShowDetail = true
             case .scan(let list):
                 peripheralList = list
+            case .ready:
+                isScanButtonEnabled = true
             default:
                 print("Not handled")
             }
@@ -70,6 +74,10 @@ struct ScanAndConnectView_Previews: PreviewProvider {
         var onConnection: ((Peripheral) -> Void)?
         
         var onDisconnection: ((Peripheral) -> Void)?
+        
+        func start() {
+            onCentralState?(.poweredOn)
+        }
         
         func scan(for services: [CBUUID]) {
             DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {

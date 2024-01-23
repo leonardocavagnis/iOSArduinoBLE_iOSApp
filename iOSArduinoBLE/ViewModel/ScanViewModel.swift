@@ -18,6 +18,7 @@ final class ScanViewModel: ObservableObject {
     init(useCase: CentralManagerUseCaseProtocol) {
         self.useCase = useCase
         setCallbacks()
+        self.useCase.start()
     }
     
     private func setCallbacks() {
@@ -35,7 +36,7 @@ final class ScanViewModel: ObservableObject {
         
         useCase.onCentralState = { [weak self] state in
             if state == .poweredOn {
-                self?.scan()
+                self?.state = .ready
             }
         }
         
@@ -65,6 +66,7 @@ final class ScanViewModel: ObservableObject {
 extension ScanViewModel {
     enum State {
         case idle
+        case ready
         case scan([Peripheral])
         case connected(Peripheral)
     }

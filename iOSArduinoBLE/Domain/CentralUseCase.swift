@@ -25,7 +25,7 @@ protocol DisconnectUseCaseProtocol {
 
 protocol ManagerStateUseCaseProtocol {
     var onCentralState: ((CBManagerState) -> Void)? { get set }
-    func connect(to peripheral: Peripheral)
+    func start()
 }
 
 typealias CentralManagerUseCaseProtocol = ConnectUseCaseProtocol & ScanUseCaseProtocol & ManagerStateUseCaseProtocol & DisconnectUseCaseProtocol
@@ -37,9 +37,11 @@ final class CentralUseCase: NSObject, CentralManagerUseCaseProtocol {
     var onConnection: ((Peripheral) -> Void)?
     var onDisconnection: ((Peripheral) -> Void)?
     
-    lazy var central: CBCentralManager = {
-        CBCentralManager(delegate: self, queue: DispatchQueue.main)
-    }()
+    var central: CBCentralManager!
+    
+    func start() {
+        central = CBCentralManager(delegate: self, queue: DispatchQueue.main)
+    }
     
     func scan(for services: [CBUUID]) {
         guard central.isScanning == false else {
