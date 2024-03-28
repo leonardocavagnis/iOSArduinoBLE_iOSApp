@@ -34,6 +34,12 @@ Please refer to the documentation for more details on how to interact with these
 - SwiftUI
 - Xcode 14.3
 
+## Device Compatibility
+
+Please note that this app is designed to work exclusively on physical iOS devices (iPhones) and cannot run on simulators. 
+
+This limitation is due to the absence of Bluetooth support in simulators.
+
 ## Authors
 
 This project was developed by:
